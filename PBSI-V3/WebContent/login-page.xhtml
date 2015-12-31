@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:loadBundle basename="fr.gtm.proxibanquesi.bundle.messages" var="msg" />
+</h:head>
+<body>
+	<f:phaseListener type="fr.gtm.proxibanquesi.front.mbeans.DebugPhase" />
+	<f:view afterPhase="#{authBean.afterPhase}">
+		<ui:composition template="template/layout.xhtml">
+			<ui:define name="content">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-3"></div>
+					<div class="ui-grid-col-6">
+						<h:form id="login-form">
+
+							<p:panel id="authentification" header="Authentification">
+								<p:messages globalOnly="true" showDetail="true"
+									autoUpdate="true" />
+								<!-- 								<h:panelGrid columns="2" cellpadding="10"> -->
+								<p:outputLabel for="login" value="Identifiant:" />
+								<p:inputText id="login" value="#{authBean.conseiller.login}">
+									<f:ajax event="blur" render="loginMessage" />
+								</p:inputText>
+								<p:message id="loginMessage" for="login" />
+								<p:outputLabel for="password" value="Mot de passe:" />
+								<p:password id="password" value="#{authBean.conseiller.mdp}">
+									<f:ajax event="blur" render="passwordMessage" />
+								</p:password>
+								<p:message id="passwordMessage" for="password" />
+								<!-- 								</h:panelGrid> -->
+								<h:commandButton action="#{authBean.authentifier}"
+									value="Valider">
+									<f:ajax execute="@form" render="@form" />
+								</h:commandButton>
+
+							</p:panel>
+
+						</h:form>
+					</div>
+					<div class="ui-grid-col-3"></div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>

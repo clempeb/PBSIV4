@@ -1,0 +1,4 @@
+
+drop table compte;
+drop table client;
+drop table conseiller;

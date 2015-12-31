@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<f:view>
+		<ui:composition template="template/layout.xhtml">
+			<ui:define name="content">
+				<h:form>
+					<p:menubar>
+
+						<p:menuitem value="Home" url="user-page.xhtml" />
+
+						<p:submenu label="Operations courantes">
+							<p:menuitem value="Créer un client" url="client-form.xhtml" />
+							<p:menuitem value="Modifer Client" url="#" />
+							<p:menuitem value="Creer un compte" url="#" />
+							<p:menuitem value="Virement" url="#" />
+						</p:submenu>
+
+						<p:menuitem value="Placement" url="user-page" />
+
+						<p:submenu label="Simulation de crédit">
+							<p:menuitem value="Consommation" url="#" />
+							<p:menuitem value="Immobilier" url="#" />
+						</p:submenu>
+
+						<p:menuitem value="Audit" url="#" />
+
+						<p:menuitem value="#{clientbean.client.nom}" />
+
+					</p:menubar>
+
+
+				</h:form>
+
+
+				<f:metadata>
+					<f:viewParam name="idclient" value="#{clientbean.id}" />
+				</f:metadata>
+
+				<p:panelGrid columns="7" layout="grid" id="clientpage-grid">
+
+					<p:outputLabel value="#{client.nom}"></p:outputLabel>
+
+					
+					<p:message id="message-read-client" showDetail="true"
+						autoUpdate="true" for="clientpage-grid" />
+					<h:outputText value="#{clientbean.id}" />
+					<h:outputText value="#{clientbean.nom}" />
+					<h:outputText value="#{clientbean.prenom}" />
+
+					<h:outputText value="#{clientbean.adresse}" />
+					<h:outputText value="#{clientbean.codePostal}" />
+					<h:outputText value="#{clientbean.ville}" />
+
+					<h:outputText value="#{clientbean.telephone}" />
+
+				</p:panelGrid>
+
+				<f:phaseListener type="fr.gtm.proxibanquesi.front.mbeans.DebugPhase" />
+
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>
